@@ -22,7 +22,7 @@ services:
     environment:
       POSTGRES_DB: ev_battery
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
