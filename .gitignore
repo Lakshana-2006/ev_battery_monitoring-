@@ -1,0 +1,78 @@
+# ============================================================
+# EV Battery Monitoring System — .gitignore
+# ============================================================
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+
+# Virtual environments
+backend/venv/
+backend/env/
+backend/.venv/
+venv/
+env/
+.venv/
+
+# Test & coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# ── Database files ───────────────────────────────────────────
+*.db
+*.sqlite3
+ev_battery.db
+
+# ── Node.js / React ──────────────────────────────────────────
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+.npm
+.eslintcache
+.oxlintrc_cache/
+
+# ── Environment & Secrets ────────────────────────────────────
+.env
+.env.local
+.env.*.local
+backend/.env
+*.secret
+secrets/
+
+# ── AI Model Artifacts (large binary files) ──────────────────
+backend/app/ai/models/*.pkl
+backend/app/ai/models/*.joblib
+backend/app/ai/models/*.h5
+backend/app/ai/models/*.onnx
+
+# ── IDE & OS ─────────────────────────────────────────────────
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+# ── Docker data volumes ───────────────────────────────────────
+mosquitto_data/
+mosquitto_log/
+docker/mosquitto/data/
+docker/mosquitto/log/
+
+# ── Logs ─────────────────────────────────────────────────────
+*.log
+logs/

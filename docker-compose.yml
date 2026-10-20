@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  # Mosquitto MQTT Broker
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: ev_battery_mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+
+  # PostgreSQL Database (Optional production DB; SQLite works out-of-the-box locally)
+  postgres:
+    image: postgres:16-alpine
+    container_name: ev_battery_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ev_battery
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  mosquitto_data:
+  mosquitto_log:
+  postgres_data:
