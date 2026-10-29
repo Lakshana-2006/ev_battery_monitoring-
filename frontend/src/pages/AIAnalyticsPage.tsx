@@ -83,9 +83,9 @@ export const AIAnalyticsPage: React.FC = () => {
 
         <div className="flex items-center space-x-2">
           <span className="text-xs text-slate-400">Model Status:</span>
-          <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold uppercase border ${getStatusBadge(prediction?.model_status)}`}>
-            {prediction?.model_status || 'NOT TRAINED'}
-          </span>
+          <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold uppercase border ${getStatusBadge(modelMeta?.status ?? prediction?.model_status)}`}>
+  {modelMeta?.status ?? prediction?.model_status ?? 'NOT TRAINED'}
+</span>
         </div>
       </div>
 
