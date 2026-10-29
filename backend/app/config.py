@@ -40,12 +40,13 @@ class Settings(BaseSettings):
 
     # Battery Physical Characteristics & Chemistry
     # Chemistries supported: 'LI_ION' (3.7V nominal, 3.0V cutoff, 4.2V full), 'LIFEPO4' (3.2V nominal, 2.5V cutoff, 3.65V full)
-    BATTERY_CHEMISTRY: str = "LI_ION"
-    SERIES_CELLS: int = 1                       # 3S configuration by default (11.1V nominal, 12.6V max, 9.0V min)
-    BATTERY_CAPACITY_AH: float = 2.4            # Nominal capacity in Amp-hours (e.g. 2.5Ah for 18650 pack, 50Ah for EV module)
-    COULOMB_CHARGE_EFFICIENCY: float = 0.98     # 98% coulombic charging efficiency
-    INITIAL_SOC_PERCENT: float = 85.0           # Default initial state of charge if uncalibrated
-
+    # Battery Physical Characteristics & Chemistry
+# Single 3.7V nominal lithium-ion cell, rated 2400mAh
+BATTERY_CHEMISTRY: str = "LI_ION"
+SERIES_CELLS: int = 1
+BATTERY_CAPACITY_AH: float = 2.4
+COULOMB_CHARGE_EFFICIENCY: float = 0.98
+INITIAL_SOC_PERCENT: float = 85.0
     # Safety Thresholds (Per Pack based on series cells)
     # Voltage Limits:
     CELL_OVERVOLTAGE_WARNING_V: float = 4.20
