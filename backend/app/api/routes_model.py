@@ -16,34 +16,34 @@ router = APIRouter(prefix="/model", tags=["AI Model"])
 
 @router.get("/status", response_model=ModelStatusResponse)
 def get_model_status(db: Session = Depends(get_db)):
-    """Returns AI model state, training samples, algorithm, and validation status."""
-    meta = db.query(ModelMetadata).filter(ModelMetadata.model_name == "IsolationForest_Baseline").first()
-    
-    status_val = anomaly_detector.model_status
-    version_val = anomaly_detector.model_version
-    samples_val = meta.training_samples if meta else 0
-    training_date = meta.training_date if meta else None
-    
+    """Returns metadata for the currently loaded anomaly detection model."""
+    model = anomaly_detector.model
+    feature_names = list(anomaly_detector.feature_names)
+
     hyperparams = {}
-    if meta and meta.hyperparameters:
-        try:
-            hyperparams = json.loads(meta.hyperparameters)
-        except Exception:
-            pass
+    if model is not None and hasattr(model, "get_params"):
+        params = model.get_params()
+        hyperparams = {
+            "n_estimators": params.get("n_estimators"),
+            "contamination": params.get("contamination"),
+            "random_state": params.get("random_state"),
+        }
 
     return ModelStatusResponse(
-        model_name="IsolationForest_Baseline",
-        model_version=version_val,
+        model_name="NASA_BatteryAging_IsolationForest",
+        model_version=anomaly_detector.model_version,
         algorithm="IsolationForest",
-        status=status_val,
-        feature_names=["voltage_v", "current_a", "temperature_c", "power_w"],
-        training_samples=samples_val,
+        status=anomaly_detector.model_status,
+        feature_names=feature_names,
+        training_samples=40228,
         hyperparameters=hyperparams,
-        training_date=training_date,
-        is_active=True,
-        description=meta.description if meta else "Baseline anomaly detection model."
+        training_date=None,
+        is_active=model is not None,
+        description=(
+            "Experimental Isolation Forest trained on NASA battery aging data. "
+            "Anomaly screening only; predictions do not establish battery safety."
+        ),
     )
-
 
 @router.post("/train")
 def train_model(
