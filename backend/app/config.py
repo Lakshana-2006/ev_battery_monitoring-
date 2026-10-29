@@ -38,21 +38,23 @@ class Settings(BaseSettings):
     STALE_DATA_THRESHOLD_SECONDS: int = 6       # Mark data as STALE if no packets within 6s
     DISCONNECTED_THRESHOLD_SECONDS: int = 15    # Mark device as DISCONNECTED if no packets within 15s
 
+    
     # Battery Physical Characteristics & Chemistry
-    # Chemistries supported: 'LI_ION' (3.7V nominal, 3.0V cutoff, 4.2V full), 'LIFEPO4' (3.2V nominal, 2.5V cutoff, 3.65V full)
-    # Battery Physical Characteristics & Chemistry
-# Single 3.7V nominal lithium-ion cell, rated 2400mAh
-BATTERY_CHEMISTRY: str = "LI_ION"
-SERIES_CELLS: int = 1
-BATTERY_CAPACITY_AH: float = 2.4
-COULOMB_CHARGE_EFFICIENCY: float = 0.98
-INITIAL_SOC_PERCENT: float = 85.0
+    # Single 3.7V nominal lithium-ion cell, rated 2400mAh
+    BATTERY_CHEMISTRY: str = "LI_ION"
+    SERIES_CELLS: int = 1
+    BATTERY_CAPACITY_AH: float = 2.4
+    COULOMB_CHARGE_EFFICIENCY: float = 0.98
+    INITIAL_SOC_PERCENT: float = 85.0
+
     # Safety Thresholds (Per Pack based on series cells)
-    # Voltage Limits:
+    
+    # Voltage limits per cell
     CELL_OVERVOLTAGE_WARNING_V: float = 4.20
-    CELL_OVERVOLTAGE_CRITICAL_V: float = 4.28
+    CELL_OVERVOLTAGE_CRITICAL_V: float = 4.20
     CELL_UNDERVOLTAGE_WARNING_V: float = 3.10
-    CELL_UNDERVOLTAGE_CRITICAL_V: float = 2.85
+    CELL_UNDERVOLTAGE_CRITICAL_V: float = 3.00
+
 
     # Current Limits:
     OVERCURRENT_CHARGE_LIMIT_A: float = 5.0     # Max charging current (+ve convention)
