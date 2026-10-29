@@ -53,7 +53,7 @@ secrets/
 
 # ── AI Model Artifacts (large binary files) ──────────────────
 backend/app/ai/models/*.pkl
-backend/app/ai/models/*.joblib
+
 backend/app/ai/models/*.h5
 backend/app/ai/models/*.onnx
 
